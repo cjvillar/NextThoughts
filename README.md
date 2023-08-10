@@ -1,4 +1,6 @@
 # Next Thoughts!
+A Next.js app
+
 ![screenshot](public/assets/images/screenshot.png)
 
 ## Getting Started

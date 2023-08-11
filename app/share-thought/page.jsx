@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
 
-const CreatePrompt = () => {
+const ShareThougth = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });
 
-  const createPrompt = async (e) => {
+  const sharethought = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -39,13 +39,13 @@ const CreatePrompt = () => {
 
   return (
     <Form
-      type='Create'
+      type='Share'
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={createPrompt}
+      handleSubmit={sharethought}
     />
   );
 };
 
-export default CreatePrompt;
+export default ShareThougth;

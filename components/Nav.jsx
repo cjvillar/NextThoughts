@@ -1,6 +1,6 @@
 "use client"; // Do to client side functionality useEffect, use State
 
-import Link  from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import {signIn, signOut, useSession, getProviders} from "next-auth/react";
@@ -23,8 +23,8 @@ const Nav = () => {
   return (
    <nav className="flex-between w-full mb-16 pt-3">
     <Link href="/" className="flex gap-2 flex-center">
-        <Image src="/assets/images/logo.svg" width={32} height={32} className="object-contain" alt="logo img"/>
-        <span className="logo_text"> Rad Branding Dude. ©</span>
+        <Image src="/assets/images/logo.svg" width={150} height={150} className="object-contain" alt="logo img"/>
+        <span className="logo_text"></span>
     </Link>
    
     {/* Desktop Navigation */}
@@ -32,17 +32,39 @@ const Nav = () => {
     <div className="sm:flex hidden">
     {session?.user ? (
         <div className="flex gap-3 md:gap-5"> 
-        <Link href="/create-prompt" className="black_btn">
+        <Link href="/share-thought" className="black_btn">
             Share Thought
         </Link>
-        <button type="button" onClick={signOut} className="outline_btn">
-            Sign Out
-        </button>
-        <Link href="/profile">
+        <div className="flex relative">
             <Image src={session?.user.image} width={37} height={37} className="rounded-full"
-            alt="profile"></Image>
-        </Link>
+            alt="profile" onClick={() => settoggleDropdown((prev) => !prev)}></Image>
+             {toggleDropdown && (
+                <div className="dropdown">
+                    <Link 
+                    href="/profile"
+                    className="dropdown_link"
+                    onClick={() => settoggleDropdown(false)}>
+                        My Profile
+                    </Link>
+                    <Link 
+                    href="/share-thought"
+                    className="dropdown_link"
+                    onClick={() => settoggleDropdown(false)}>
+                       Create Thought
+                    </Link>
+                    <Link href="/" passHref>
+                    <button type="button"
+                    onClick={() => {settoggleDropdown(false); 
+                    signOut();
+                    }}
+                    className="mt-5 w-full black_btn">
+                        Sign Out
+                    </button>
+                    </Link>
+                </div>
+            )}
         </div>
+    </div>
     ): ( 
     <>
     {providers && 
@@ -74,11 +96,12 @@ const Nav = () => {
                         My Profile
                     </Link>
                     <Link 
-                    href="/create-prompt"
+                    href="/share-thought"
                     className="dropdown_link"
                     onClick={() => settoggleDropdown(false)}>
                        Create Thought
                     </Link>
+                    <Link href="/" passHref>
                     <button type="button"
                     onClick={() => {settoggleDropdown(false); 
                     signOut();
@@ -86,6 +109,7 @@ const Nav = () => {
                     className="mt-5 w-full black_btn">
                         Sign Out
                     </button>
+                    </Link>
                 </div>
             )}
             </div>

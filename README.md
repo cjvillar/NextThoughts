@@ -1,6 +1,6 @@
 # Next Thoughts!
 A Next.js app
-[THOUGHTS!](https://next-thoughts-9nrdz55uh-chrisjudevillarreal-gmailcom.vercel.app/)
+[THOUGHTS!](https://next-thoughts-ashen.vercel.app/)
 
 ![screenshot](public/assets/images/thoughts.png)
 

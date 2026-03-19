@@ -16,41 +16,32 @@ export const GET = async (request, { params }) => {
     }
 }
 
-// Patch (update)
+// PATCH — return JSON, not plain text
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag } = await request.json();
+  const { prompt, tag } = await request.json();
+  try {
+    await connectToDB();
+    const existingPrompt = await Prompt.findById(params.id);
+    if (!existingPrompt) return new Response("Thought not found", { status: 404 });
 
-    try {
-        await connectToDB();
+    existingPrompt.prompt = prompt;
+    existingPrompt.tag = tag;
+    await existingPrompt.save();
 
-        // Find the existing prompt by ID
-        const existingPrompt = await Prompt.findById(params.id);
 
-        if (!existingPrompt) {
-            return new Response("Thought not found", { status: 404 });
-        }
-
-        // Update the prompt with new data
-        existingPrompt.prompt = prompt;
-        existingPrompt.tag = tag;
-
-        await existingPrompt.save();
-
-        return new Response("Successfully updated the Thoughts", { status: 200 });
-    } catch (error) {
-        return new Response("Error Updating Thought", { status: 500 });
-    }
+    return new Response(JSON.stringify(existingPrompt), { status: 200 });
+  } catch (error) {
+    return new Response("Error Updating Thought", { status: 500 });
+  }
 };
 
+// DELETE 
 export const DELETE = async (request, { params }) => {
-    try {
-        await connectToDB();
-
-        // Find the prompt by ID and remove it
-        await Prompt.findByIdAndRemove(params.id);
-
-        return new Response("Thought deleted successfully", { status: 200 });
-    } catch (error) {
-        return new Response("Error deleting Thought", { status: 500 });
-    }
+  try {
+    await connectToDB();
+    await Prompt.findByIdAndDelete(params.id); // ✅ not findByIdAndRemove
+    return new Response("Thought deleted successfully", { status: 200 });
+  } catch (error) {
+    return new Response("Error deleting Thought", { status: 500 });
+  }
 };

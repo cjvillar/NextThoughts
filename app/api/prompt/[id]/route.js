@@ -39,7 +39,7 @@ export const PATCH = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
   try {
     await connectToDB();
-    await Prompt.findByIdAndDelete(params.id); // ✅ not findByIdAndRemove
+    await Prompt.findByIdAndDelete(params.id);
     return new Response("Thought deleted successfully", { status: 200 });
   } catch (error) {
     return new Response("Error deleting Thought", { status: 500 });

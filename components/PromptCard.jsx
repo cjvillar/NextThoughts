@@ -26,8 +26,8 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
     setTimeout(() => setCopied(false), 3000);
   };
 
-  const email = post.creator.email
-  const userEmail = email.slice(email.indexOf("@") + 1);
+ // const email = post.creator.email
+// const userEmail = email.slice(email.indexOf("@") + 1);
 
   return (
     <div className='prompt_card'>
@@ -48,9 +48,9 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             <h3 className='font-satoshi font-semibold text-gray-900'>
               {post.creator.username.slice(0, 5)} {/* slice only shows fisrt 5 letters of user name*/}
             </h3>
-            <p className='font-inter text-sm text-gray-500'>
+            {/* <p className='font-inter text-sm text-gray-500'>
               {userEmail}
-            </p>
+            </p> */}
           </div>
         </div>
 

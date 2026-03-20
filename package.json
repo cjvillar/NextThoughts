@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier --write \"app/**/*.{js,jsx}\""
+    "lint": "prettier --write \"app/**/*.{js,jsx}\"",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "autoprefixer": "^10.4.27",
@@ -23,7 +26,12 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@vitejs/plugin-react": "^6.0.1",
     "eslint": "10.0.3",
-    "eslint-config-next": "16.2.0"
+    "eslint-config-next": "16.2.0",
+    "jsdom": "^29.0.1",
+    "vitest": "^4.1.0"
   }
 }

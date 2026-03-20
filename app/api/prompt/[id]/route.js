@@ -6,7 +6,9 @@ export const GET = async (request, { params }) => {
     try {
         await connectToDB()
 
-        const prompt = await Prompt.findById(params.id).populate("creator", "-email")
+        const { id } = await params;
+
+        const prompt = await Prompt.findById(id).populate("creator", "-email")
         if (!prompt) return new Response("Thought Not Found", { status: 404 });
 
         return new Response(JSON.stringify(prompt), { status: 200 })
@@ -21,7 +23,8 @@ export const PATCH = async (request, { params }) => {
   const { prompt, tag } = await request.json();
   try {
     await connectToDB();
-    const existingPrompt = await Prompt.findById(params.id);
+    const { id } = await params;
+    const existingPrompt = await Prompt.findById(id);
     if (!existingPrompt) return new Response("Thought not found", { status: 404 });
 
     existingPrompt.prompt = prompt;
@@ -39,7 +42,8 @@ export const PATCH = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
   try {
     await connectToDB();
-    await Prompt.findByIdAndDelete(params.id);
+    const { id } = await params;
+    await Prompt.findByIdAndDelete(id);
     return new Response("Thought deleted successfully", { status: 200 });
   } catch (error) {
     return new Response("Error deleting Thought", { status: 500 });

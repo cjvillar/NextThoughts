@@ -1,4 +1,4 @@
-# Next Thoughts!
+# Next Thoughts! [![Run Tests](https://github.com/cjvillar/NextThoughts/actions/workflows/test.yml/badge.svg)](https://github.com/cjvillar/NextThoughts/actions/workflows/test.yml)
 A Next.js app
 [THOUGHTS!](https://next-thoughts-ashen.vercel.app/)
 

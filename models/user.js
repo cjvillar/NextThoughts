@@ -13,7 +13,16 @@ const UserSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    reputation: {
+            type: Number,
+            required: true,
+            min: 1,
+            max: 5
+        },
+        badges: {
+            type: String,
+        }
 });
 
 const User = models.User || model("User", UserSchema);
